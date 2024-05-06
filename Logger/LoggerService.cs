@@ -7,67 +7,39 @@ public class LoggerService: ILoggerService
 {
     public bool ProcessLog(string logMessage)
     {
-        MongoClient client = new MongoClient("mongodb://localhost:27017");
-
-        var playlistCollection = client.GetDatabase("sample_mflix").GetCollection<Playlist>("playlist");
-
-        List<string> movieList = new List<string>();
-        movieList.Add("1234");
-
-        playlistCollection.InsertOne(new Playlist("nraboy", movieList));
-
-        FilterDefinition<Playlist> filter = Builders<Playlist>.Filter.Eq("username", "nraboy");
-
-        List<Playlist> results = playlistCollection.Find(filter).ToList();
-
-        foreach (Playlist result in results)
+        try
         {
-            Console.WriteLine(string.Join(", ", result.items));
+            // Establish a connection to the local MongoDB instance
+            MongoClient client = new MongoClient("mongodb://localhost:27017");
+
+            // Access the "LogData" database and retrieve the "logInfo" collection
+            var logListCollection = client.GetDatabase("LogData").GetCollection<LogInfo>("logInfo");
+
+            // Insert a new LogInfo document into the logInfo collection
+            logListCollection.InsertOne(new LogInfo(logMessage));
+
+            // Define a filter to find LogInfo documents with a specific logMessage
+            FilterDefinition<LogInfo> filter = Builders<LogInfo>.Filter.Eq("message", logMessage);
+
+            // Execute the query to find LogInfo documents matching the filter and convert the results to a list
+            List<LogInfo> results = logListCollection.Find(filter).ToList();
+
+            // Iterate through the results and print each LogInfo's EntryTime and Message to the console
+            foreach (LogInfo result in results)
+            {
+                // Corrected print format
+                Console.WriteLine($"{result.EntryTime.ToString("dd/MM/yyyy hh:mm tt")}: {result.Message}");
+            }
+
+            // Indicate that the log processing was successful by returning true
+            return true;
         }
-
-        return true;
+        catch (Exception ex)
+        {
+            // Print the exception message if an error occurs
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            return false; // Indicate that the log processing was unsuccessful
+        }
     }
-
-    //private readonly ILogger _logger;
-
-    //public LoggerService()
-    //{
-    //    _logger = new LoggerConfiguration()
-    //        .MinimumLevel.Debug()
-    //        .WriteTo.MongoDB("mongodb://localhost:27017", "sample_mflix", Serilog.Events.LogEventLevel.Information)
-    //        .CreateLogger();
-    //}
-
-    //public bool ProcessLog(string logMessage)
-    //{
-    //    try
-    //    {
-    //        // Log the message received from the calling application
-    //        _logger.Information(logMessage);
-
-    //        // Your existing logging logic goes here
-    //        MongoClient client = new MongoClient("mongodb://localhost:27017");
-    //        var database = client.GetDatabase("sample_mflix"); // Your MongoDB database name
-    //        var collection = database.GetCollection<LogEvent>("LogCollector"); // Your MongoDB collection name
-
-    //        // Serialize log message and insert into MongoDB
-    //        var logEvent = new LogEvent(
-    //            DateTimeOffset.UtcNow,
-    //            LogEventLevel.Information,
-    //            null,
-    //            new MessageTemplate(logMessage),
-    //            new LogEventProperty[0]
-    //        );
-    //        collection.InsertOne(logEvent);
-
-    //        return true;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        // Log error if an exception occurs during logging
-    //        _logger.Error(ex, "Error occurred while processing log.");
-    //        return false;
-    //    }
-    //}
 }
 
