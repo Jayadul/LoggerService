@@ -23,7 +23,7 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.WithProperty("ApplicationName", builder.Environment.ApplicationName) // Include the application name
     .Enrich.WithProperty("EnvironmentName", builder.Environment.EnvironmentName) // Include the environment name
     .WriteTo.Console() // Write logs to console
-    .WriteTo.Seq("http://localhost:5341",
+    .WriteTo.Seq("http://host.docker.internal:5341",
                  apiKey: "FcUQ9ujzJGvFK7gvRkrj",
                  controlLevelSwitch: levelSwitch)
     .CreateLogger();

@@ -5,4 +5,21 @@ services:
     image: ${DOCKER_REGISTRY-}webapi
     build:
       context: .
-      dockerfile: Web.API/Dockerfile
+      dockerfile: Web.Api/Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - mongodb
+      - seq
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  seq:
+    image: datalust/seq:latest
+    ports:
+      - "5341:5341"

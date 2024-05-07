@@ -10,7 +10,7 @@ public class LoggerService: ILoggerService
         try
         {
             // Establish a connection to the local MongoDB instance
-            MongoClient client = new MongoClient("mongodb://localhost:27017");
+            MongoClient client = new MongoClient("mongodb://host.docker.internal:27017");
 
             // Access the "LogData" database and retrieve the "logInfo" collection
             var logListCollection = client.GetDatabase("LogData").GetCollection<LogInfo>("logInfo");
