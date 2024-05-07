@@ -1,25 +1,23 @@
 version: '3.4'
 
 services:
-  web.api:
-    image: ${DOCKER_REGISTRY-}webapi
+  web.api: # Service for the Web API
+    image: ${DOCKER_REGISTRY-}webapi # Docker image for the Web API
     build:
-      context: .
-      dockerfile: Web.Api/Dockerfile
+      context: . # Build context
+      dockerfile: Web.Api/Dockerfile # Path to the Dockerfile
     ports:
-      - "5000:80"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - "5000:80" # Port mapping
     depends_on:
-      - mongodb
-      - seq
+      - mongodb # Dependency on MongoDB service
+      - seq # Dependency on Seq service
 
-  mongodb:
-    image: mongo
+  mongodb: # Service for MongoDB
+    image: mongo # Docker image for MongoDB
     ports:
-      - "27017:27017"
+      - "27017:27017" # Port mapping for MongoDB
 
-  seq:
-    image: datalust/seq:latest
+  seq: # Service for Seq
+    image: datalust/seq:latest # Docker image for Seq
     ports:
-      - "5341:5341"
+      - "5341:5341" # Port mapping for Seq

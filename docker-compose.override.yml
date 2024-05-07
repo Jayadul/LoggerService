@@ -1,13 +1,14 @@
-version: '3.4'
+version: '3.4' # Version of the Docker Compose file format
 
 services:
-  web.api:
+  web.api: # Definition of the service for the Web API
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development # Setting ASP.NET Core environment to Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80 # Specifying ASP.NET Core URLs for HTTPS and HTTP
     ports:
-      - "80"
-      - "443"
+      - "80" # Mapping port 80 on the host to port 80 in the container (HTTP)
+      - "443" # Mapping port 443 on the host to port 443 in the container (HTTPS)
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - .:/app # Mounting current directory as a volume to facilitate live code reloading
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro # Mounting UserSecrets directory as read-only volume
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro # Mounting HTTPS directory as read-only volume
