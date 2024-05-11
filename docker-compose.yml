@@ -3,21 +3,31 @@ version: '3.4'
 services:
   web.api: # Service for the Web API
     image: ${DOCKER_REGISTRY-}webapi # Docker image for the Web API
-    build:
+    build: # Define build options
       context: . # Build context
       dockerfile: Web.Api/Dockerfile # Path to the Dockerfile
-    ports:
-      - "5000:80" # Port mapping
-    depends_on:
+    ports: # Port mapping
+      - "5000:80" # Map host port 5000 to container port 80
+    depends_on: # Define service dependencies
       - mongodb # Dependency on MongoDB service
       - seq # Dependency on Seq service
+    networks: # Attach to a network
+      - shared-net # Use the shared network 'shared-net'
 
   mongodb: # Service for MongoDB
     image: mongo # Docker image for MongoDB
-    ports:
-      - "27017:27017" # Port mapping for MongoDB
+    ports: # Port mapping for MongoDB
+      - "27017:27017" # Map host port 27017 to container port 27017
+    networks: # Attach to a network
+      - shared-net # Use the shared network 'shared-net'
 
   seq: # Service for Seq
     image: datalust/seq:latest # Docker image for Seq
-    ports:
-      - "5341:5341" # Port mapping for Seq
+    ports: # Port mapping for Seq
+      - "5341:5341" # Map host port 5341 to container port 5341
+    networks: # Attach to a network
+      - shared-net # Use the shared network 'shared-net'
+
+networks: # Define networks
+  shared-net: # Define the external network 'shared-net'
+    external: true # Declare the network as external
