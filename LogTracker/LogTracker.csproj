@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageId>SLS.TRACKER.LOGGER</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Jayadul Shuvo</Authors>
+		<Company>SLS</Company>
+		<Product>LOG TRACKER</Product>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Serilog.Sinks.LogBee.AspNetCore" Version="1.0.3" />
+	</ItemGroup>
+
+</Project>

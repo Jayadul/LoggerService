@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logger", "Logger\Logger.csp
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{34380023-1B1C-48D6-8082-F35323BDD8F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeriodicLogger", "PeriodicLogger\PeriodicLogger.csproj", "{1DEF7CFC-C2D6-4D51-9259-D96994CD5B52}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogTracker", "LogTracker\LogTracker.csproj", "{CEBA89AE-82F2-40DD-AE57-33E138DA1A30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{34380023-1B1C-48D6-8082-F35323BDD8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34380023-1B1C-48D6-8082-F35323BDD8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34380023-1B1C-48D6-8082-F35323BDD8F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DEF7CFC-C2D6-4D51-9259-D96994CD5B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DEF7CFC-C2D6-4D51-9259-D96994CD5B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DEF7CFC-C2D6-4D51-9259-D96994CD5B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DEF7CFC-C2D6-4D51-9259-D96994CD5B52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEBA89AE-82F2-40DD-AE57-33E138DA1A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEBA89AE-82F2-40DD-AE57-33E138DA1A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEBA89AE-82F2-40DD-AE57-33E138DA1A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEBA89AE-82F2-40DD-AE57-33E138DA1A30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
